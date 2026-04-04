@@ -1,0 +1,32 @@
+version: 1.0.0
+name: MultiStockPortfolioEnv
+author: Meesala Suresh Gopi
+description: >
+  A real-world OpenEnv environment simulating multi-stock portfolio management.
+  The agent must maximize returns and intelligently allocate capital across
+  several assets while managing drawdown, acting as a real automated trader.
+tags:
+  - finance
+  - trading
+  - portfolio-allocation
+  - rl
+
+tasks:
+  - id: single_stock_profit
+    name: Easy Task - Single Stock Profitability
+    description: Achieve positive profitability trading a single heavily-trending stock.
+    difficulty: easy
+  
+  - id: multi_stock_diversification
+    name: Medium Task - Multi-Stock Diversification
+    description: Actively manage a portfolio of 3 stocks to achieve positive absolute returns.
+    difficulty: medium
+    
+  - id: risk_adjusted_returns
+    name: Hard Task - Risk Adjusted Returns
+    description: Achieve high market-beating returns on a 5-stock portfolio while restricting max drawdown to < 10%.
+    difficulty: hard
+
+metadata:
+  action_space: dict of float
+  observation_space: dict
