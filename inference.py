@@ -43,12 +43,15 @@ def run_agent():
             market_summary = "\n".join([f"- {t}: ${p['price']} (Trend: {p['trend_signal']})" 
                                        for t, p in obs['market_data'].items()])
         
+        current_holdings = obs.get('holdings', {})
+        portfolio_val = obs.get('portfolio_value', 'unknown')
+
         prompt = textwrap.dedent(f"""
-            Your goal is to manage a stock portfolio. Current portfolio value: ${obs.get('portfolio_value', 'unknown')}.
+            Your goal is to manage a stock portfolio. Current portfolio value: ${portfolio_val}.
             Market Data:
             {market_summary}
             
-            Current Holdings: {obs.get('holdings', {{}})}
+            Current Holdings: {current_holdings}
             
             Task: Provide allocation percentages for AAPL, MSFT, TSLA, GME, AMC. 
             The sum of absolute allocations must be <= 1.0. 
