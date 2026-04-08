@@ -2,7 +2,8 @@ from typing import Dict, Any, List
 
 def clamp_score(score: float) -> float:
     # Hackathon requirement: Each task's score must be strictly between 0 and 1 (not 0.0 and not 1.0)
-    return max(0.001, min(0.999, float(score)))
+    # Using 0.01 and 0.99 to be safe from floating point precision issues
+    return max(0.01, min(0.99, float(score)))
 
 def grade_single_stock_profit(trajectory: List[Dict[str, Any]]) -> float:
     # Easy Task: agent traded a single stock and made profit

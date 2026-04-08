@@ -16,16 +16,19 @@ tasks:
     name: Easy Task - Single Stock Profitability
     description: Achieve positive profitability trading a single heavily-trending stock.
     difficulty: easy
+    grader: deterministic
   
   - id: multi_stock_diversification
     name: Medium Task - Multi-Stock Diversification
     description: Actively manage a portfolio of 3 stocks to achieve positive absolute returns.
     difficulty: medium
+    grader: deterministic
     
   - id: risk_adjusted_returns
     name: Hard Task - Risk Adjusted Returns
     description: Achieve high market-beating returns on a 5-stock portfolio while restricting max drawdown to < 10%.
     difficulty: hard
+    grader: deterministic
 
 metadata:
   action_space: dict of float

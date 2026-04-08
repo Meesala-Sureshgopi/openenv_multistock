@@ -38,14 +38,14 @@ def step(action: Action):
     obs, reward, done, info = env.step(action)
     return {
         "observation": obs,
-        "reward": reward,
+        "reward": reward.value, # Flattened float reward for protocol compliance
         "done": done,
         "info": info
     }
 
-@app.post("/evaluate")
-def evaluate(payload: Dict[str, Any] = Body(...)):
-    # Compliant evaluation endpoint
+@app.post("/grader")
+def grader(payload: Dict[str, Any] = Body(...)):
+    # Compliant evaluation endpoint (matching OpenEnv /grader spec)
     task_id = payload.get("task_id")
     trajectory = payload.get("trajectory", [])
     

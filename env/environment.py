@@ -107,7 +107,14 @@ class MultiStockEnv:
                 
         # Meaningful reward: normalized return * (1 - penalty for drawdown)
         step_return = (new_total - total_value) / total_value
-        reward_val = step_return - (self.max_drawdown * 0.5)
+        
+        # MAPPING: strictly between 0 and 1 (not 0.0 and not 1.0)
+        # Using a sigmoid-like squash to ensure returns map to (0.2, 0.8) and extremes to (0.01, 0.99)
+        # Center at 0.5 (zero return = 0.5 reward)
+        reward_val = 0.5 + 0.4 * (step_return / (1 + abs(step_return))) - (self.max_drawdown * 0.1)
+        
+        # Final safety clamp
+        reward_val = max(0.001, min(0.999, float(reward_val)))
         
         done = self.current_step >= self.max_steps
         
