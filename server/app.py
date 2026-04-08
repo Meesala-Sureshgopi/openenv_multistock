@@ -61,8 +61,24 @@ def grader(payload: Dict[str, Any] = Body(...)):
         
     return {"score": score}
 
-@app.get("/")
+@app.get("/health")
 def health_check():
+    return {"status": "healthy"}
+
+@app.get("/metadata")
+def metadata():
+    return {"name": "MultiStockPortfolioEnv", "description": "A real-world OpenEnv environment simulating multi-stock portfolio management."}
+
+@app.get("/schema")
+def schema():
+    return {
+        "action": {"type": "object"},
+        "observation": {"type": "object"},
+        "state": {"type": "object"}
+    }
+
+@app.get("/")
+def root():
     return {"message": "OpenEnv Multi-Stock Running", "status": 200}
 
 def main():
